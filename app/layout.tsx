@@ -5,6 +5,8 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { ToastProvider } from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers/confetti-provider'
 
+import "@stream-io/video-react-sdk/dist/css/styles.css";import ClientProvider from '@/components/providers/ClientProvider'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,9 +23,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <ConfettiProvider />
-          <ToastProvider />
-          {children}
+            <ConfettiProvider />
+            <ToastProvider />
+          <ClientProvider>
+            {children}
+          </ClientProvider>
         </body>
       </html>
     </ClerkProvider>
