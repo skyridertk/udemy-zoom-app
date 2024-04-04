@@ -88,6 +88,7 @@ export const CategoryForm = ({
           {selectedOption?.label || "No category"}
         </p>
       )}
+
       {isEditing && (
         <Form {...form}>
           <form
@@ -100,8 +101,9 @@ export const CategoryForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
+
                     <Combobox
-                      options={...options}
+                      options={options}
                       {...field}
                     />
                   </FormControl>

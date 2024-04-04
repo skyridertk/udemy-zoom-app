@@ -114,6 +114,7 @@ const CourseIdPage = async ({
               initialData={course}
               courseId={course.id}
             />
+            
             <CategoryForm
               initialData={course}
               courseId={course.id}
