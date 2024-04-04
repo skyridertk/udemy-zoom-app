@@ -31,6 +31,7 @@ export const Combobox = ({
 }: ComboboxProps) => {
   const [open, setOpen] = React.useState(false)
 
+  // console.log(options)
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -67,6 +68,7 @@ export const Combobox = ({
                 />
                 {option.label}
               </CommandItem>
+
             ))}
           </CommandGroup>
         </Command>

@@ -17,11 +17,6 @@ const guestRoutes = [
     href: "/search",
   },
   {
-    icon: Video,
-    label: "Video Chat",
-    href: "/chat",
-  },
-  {
     icon: Timer,
     label: "Meetings",
     href: "/meetings",
