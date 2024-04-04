@@ -27,6 +27,8 @@ export default function ChatSidebar({
     if (!show) setUsersMenuOpen(false);
   }, [show]);
 
+  const isTeacher = user?.id === process.env.NEXT_PUBLIC_TEACHER_ID;
+
   const ChannelPreviewCustom = useCallback(
     (props: ChannelPreviewUIComponentProps) => (
       <ChannelPreviewMessenger
@@ -54,8 +56,10 @@ export default function ChatSidebar({
             setUsersMenuOpen(false);
             onClose();
           }}
+          isTeacher={isTeacher}
         />
       )}
+
       <MenuBar onUserMenuClick={() => setUsersMenuOpen(true)} />
       <ChannelList
         filters={{

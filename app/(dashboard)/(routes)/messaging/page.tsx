@@ -28,16 +28,17 @@ export default function ChatPage({
 }: ChatPageProps) {
   const chatClient = useInitializeChatClient();
   const { user } = useUser();
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
 
-  const [chatSidebarOpen, setChatSidebarOpen] = useState(false);
+  const [chatSidebarOpen, setChatSidebarOpen] = useState(true);
 
   const windowSize = useWindowSize();
-  const isLargeScreen = windowSize.width >= mdBreakpoint;
+  // const isLargeScreen = windowSize.width >= mdBreakpoint;
+  const isLargeScreen = true
 
-  useEffect(() => {
-    if (windowSize.width >= mdBreakpoint) setChatSidebarOpen(false);
-  }, [windowSize.width]);
+//   useEffect(() => {
+//     if (windowSize.width >= mdBreakpoint) setChatSidebarOpen(false);
+//   }, [windowSize.width]);
 
   useEffect(() => {
     async function setUpServiceWorker() {
@@ -70,6 +71,8 @@ export default function ChatPage({
     }
   }, [channelId]);
 
+  
+
   const handleSidebarOnClose = useCallback(() => {
     setChatSidebarOpen(false);
   }, []);
@@ -88,9 +91,7 @@ export default function ChatPage({
         <Chat
           client={chatClient}
           i18nInstance={i18Instance}
-          theme={
-            theme === "dark" ? "str-chat__theme-dark" : "str-chat__theme-light"
-          }
+          theme={"str-chat__theme-light"}
         >
           <div className="flex justify-center border-b border-b-[#DBDDE1] p-3 md:hidden">
             <button onClick={() => setChatSidebarOpen(!chatSidebarOpen)}>
@@ -120,4 +121,7 @@ export default function ChatPage({
       </div>
     </div>
   );
+
 }
+
+

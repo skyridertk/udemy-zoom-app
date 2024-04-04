@@ -4,8 +4,10 @@ import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ToastProvider } from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers/confetti-provider'
+import ThemeProvider from '@/components/providers/ThemeProvider'
+import ClientProvider from '@/components/providers/ClientProvider'
 
-import "@stream-io/video-react-sdk/dist/css/styles.css";import ClientProvider from '@/components/providers/ClientProvider'
+import "@stream-io/video-react-sdk/dist/css/styles.css"; 
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,11 +25,14 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
+          <ThemeProvider>
+
             <ConfettiProvider />
             <ToastProvider />
-          <ClientProvider>
-            {children}
-          </ClientProvider>
+            <ClientProvider>
+              {children}
+            </ClientProvider>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

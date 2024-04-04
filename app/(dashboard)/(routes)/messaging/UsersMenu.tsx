@@ -15,12 +15,14 @@ interface UsersMenuProps {
   loggedInUser: UserResource;
   onClose: () => void;
   onChannelSelected: () => void;
+  isTeacher: boolean;
 }
 
 export default function UsersMenu({
   loggedInUser,
   onClose,
   onChannelSelected,
+  isTeacher
 }: UsersMenuProps) {
   const { client, setActiveChannel } = useChatContext();
 
@@ -46,22 +48,29 @@ export default function UsersMenu({
       // await new Promise((resolve) => setTimeout(resolve, 1000));
 
       try {
+        let filterCondition = {};
+        if (isTeacher) {
+          // If the current user is a teacher, exclude the teacher from the list
+          filterCondition.id = { $ne: process.env.NEXT_PUBLIC_TEACHER_ID };
+        } else {
+          // If the current user is not a teacher, show only the teacher
+          filterCondition.id = process.env.NEXT_PUBLIC_TEACHER_ID;
+        }
+
         const response = await client.queryUsers(
           {
-            id: { $ne: loggedInUser.id },
-            ...(searchInputDebounced
-              ? {
-                  $or: [
-                    { name: { $autocomplete: searchInputDebounced } },
-                    { id: { $autocomplete: searchInputDebounced } },
-                  ],
-                }
-              : {}),
+            ...filterCondition,
+            ...(searchInputDebounced ? {
+              $or: [
+                { name: { $autocomplete: searchInputDebounced } },
+                { id: { $autocomplete: searchInputDebounced } },
+              ],
+            } : {}),
           },
           { id: 1 },
           { limit: pageSize + 1 }
         );
-
+        
         setUsers(response.users.slice(0, pageSize));
         setEndOfPaginationReached(response.users.length <= pageSize);
       } catch (error) {
@@ -70,7 +79,7 @@ export default function UsersMenu({
       }
     }
     loadInitialUsers();
-  }, [client, loggedInUser.id, searchInputDebounced]);
+  }, [client, loggedInUser.id, searchInputDebounced, isTeacher]);
 
   async function loadMoreUsers() {
     setMoreUsersLoading(true);
@@ -88,11 +97,11 @@ export default function UsersMenu({
             { id: { $gt: lastUserId } },
             searchInputDebounced
               ? {
-                  $or: [
-                    { name: { $autocomplete: searchInputDebounced } },
-                    { id: { $autocomplete: searchInputDebounced } },
-                  ],
-                }
+                $or: [
+                  { name: { $autocomplete: searchInputDebounced } },
+                  { id: { $autocomplete: searchInputDebounced } },
+                ],
+              }
               : {},
           ],
         },

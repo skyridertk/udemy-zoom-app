@@ -1,4 +1,3 @@
-import { env } from "@/env";
 import { getReadyServiceWorker } from "@/utils/serviceWorker";
 
 export async function getCurrentPushSubscription(): Promise<PushSubscription | null> {
@@ -21,7 +20,7 @@ export async function registerPushNotifications() {
 
   const subscription = await sw.pushManager.subscribe({
     userVisibleOnly: true,
-    applicationServerKey: env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
+    applicationServerKey: process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
   });
 
   await sendPushSubscriptionToServer(subscription);

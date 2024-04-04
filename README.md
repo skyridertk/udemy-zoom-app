@@ -80,3 +80,10 @@ Running commands with npm `npm run [command]`
 | command         | description                              |
 | :-------------- | :--------------------------------------- |
 | `dev`           | Starts a development instance of the app |
+
+
+
+Generate Push Keys
+npx web-push generate-vapid-keys
+
+NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY=

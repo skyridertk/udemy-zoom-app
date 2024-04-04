@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, Compass, Layout, List, Timer, BarChart2 } from "lucide-react";
+import { BarChart, Compass, Layout, List, Timer, BarChart2, Video, Contact } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { SidebarItem } from "./sidebar-item";
@@ -17,8 +17,8 @@ const guestRoutes = [
     href: "/search",
   },
   {
-    icon: BarChart2,
-    label: "Chat",
+    icon: Video,
+    label: "Video Chat",
     href: "/chat",
   },
   {
@@ -26,11 +26,11 @@ const guestRoutes = [
     label: "Meetings",
     href: "/meetings",
   },
-  // {
-  //   icon: Timer,
-  //   label: "Messaging",
-  //   href: "/messaging",
-  // },
+  {
+    icon: Contact,
+    label: "Messaging",
+    href: "/messaging",
+  },
 ];
 
 const teacherRoutes = [
@@ -45,8 +45,8 @@ const teacherRoutes = [
     href: "/teacher/analytics",
   },
   {
-    icon: BarChart2,
-    label: "Chat",
+    icon: Video,
+    label: "Video Chat",
     href: "/chat",
   },
   {
@@ -54,11 +54,11 @@ const teacherRoutes = [
     label: "Meetings",
     href: "/meetings",
   },
-  // {
-  //   icon: Timer,
-  //   label: "Messaging",
-  //   href: "/messaging",
-  // },
+  {
+    icon: Contact,
+    label: "Messaging",
+    href: "/messaging",
+  },
 ]
 
 
